@@ -1,0 +1,16 @@
+- Сделать так чтобы он писал стихи/тексты
+- Сделать так чтобы фонема генерировалась если есть другая фонемы
+eg. A conlang that allows (C(L))V(N), (C)V(L), (L)(C)V(C), (L)V(C) etc. but only allows the (L) if the (C) is a plosive.
+-- Так что к свойствам фонемы помимо символа и множества потомков (в случае нетерминала), нужно добавить правило (контекст) генерации фонемы и аттрибуты
+
++ Факультативная генерация фонемы 
+
+
+File > Project Structure > Artifacts > зеленый "+" > JAR > From modules with dependencies
+
+Указываю в "Main class" Program.java и выбираю "Extract to the target jar". Нажимаю "ОК" и появляется имя файла "ConlangGenerator.jar". Жму "ОК"
+
+Потом захожу в Build > Build artifacts и выбираю "Build". Всё успешно компилиться
+
+Но когда я пытаюсь запустить файл "ConlangGenerator.jar", появлется ошибка "A JNI error has occurred, please check installation and try again"
+
