@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ConlangGenerator:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ConlangGenerator_jar</output-path>
+    <root id="archive" name="ConlangGenerator.jar">
+      <element id="module-output" name="ConlangGenerator" />
+    </root>
+  </artifact>
+</component>
