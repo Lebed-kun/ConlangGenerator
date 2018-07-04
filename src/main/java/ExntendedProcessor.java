@@ -2,15 +2,25 @@ package main.java;
 
 import main.java.WordGenerator.*;
 
+import java.io.*;
 import java.util.HashMap;
 
 public class ExntendedProcessor extends Processor {
+    // Constants
+    private static final int MAX_WORDS_PER_LINE = 10;
+    private static final String PATH_TO_STATE = "./props/";
+    private static final String PATH_TO_WORDS = "./words/";
+
     // Values
     private HashMap<String, PhoneticTemplateTree> templates;
 
     // Fields
     public HashMap<String, PhoneticTemplateTree> getTemplates() {
         return templates;
+    }
+
+    public void setTemplates(HashMap<String, PhoneticTemplateTree> templates) {
+        this.templates = templates;
     }
 
     // Constructors
@@ -48,7 +58,49 @@ public class ExntendedProcessor extends Processor {
                     res = "@help_succ";
                     break;
 
-                    default:
+                case "save_state":
+                    if (args.length < 2)
+                        throw new InvalidArgumentException(args[0], "2 arguments");
+
+                    try {
+                        saveValues(args);
+                        res = "@save_state_succ";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case "load_state":
+                    if (args.length < 2)
+                        throw new InvalidArgumentException(args[0], "2 arguments");
+
+                    try {
+                        loadValues(args);
+                        res = "@load_state_succ";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    break;
+
+                case "save_words":
+                    if (args.length < 2)
+                        throw new InvalidArgumentException(args[0], "2 arguments");
+
+                    try {
+                        saveWords(args);
+                        res = "@save_words_succ";
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+                    break;
+
+                default:
                         res = "@unknown_command";
                         break;
             }
@@ -113,5 +165,46 @@ public class ExntendedProcessor extends Processor {
         }
     }
 
+    protected void saveValues(String[] args) throws IOException {
+        File dir = new File(PATH_TO_STATE);
+        if (!dir.exists())
+            dir.mkdir();
 
+        ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream(PATH_TO_STATE + args[1]));
+
+        oos.writeObject(getPhoneticSet());
+        oos.writeObject(getTemplates());
+
+        oos.close();
+    }
+
+    protected void loadValues(String[] args) throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream(PATH_TO_STATE + args[1]));
+
+        setPhoneticSet((PhoneticTreeSet) ois.readObject());
+        setTemplates((HashMap<String, PhoneticTemplateTree>) ois.readObject());
+
+        ois.close();
+    }
+
+    protected void saveWords(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+        File dir = new File(PATH_TO_WORDS);
+        if (!dir.exists())
+            dir.mkdir();
+
+        PrintWriter printWriter = new PrintWriter(PATH_TO_WORDS + args[1], "UTF-8");
+
+        int i = 0;
+        for (String word : getWords()) {
+            printWriter.write(word);
+            if (i % MAX_WORDS_PER_LINE < MAX_WORDS_PER_LINE - 1)
+                printWriter.write(" ");
+            else
+                printWriter.write("\n");
+        }
+
+        printWriter.close();
+    }
 }

@@ -48,6 +48,18 @@ public class OutputCompounder {
             case "@unknown_command":
                 System.out.println("Unknown command");
                 break;
+
+            case "@save_state_succ":
+                saveValues();
+                break;
+
+            case "@load_state_succ":
+                loadValues();
+                break;
+
+            case "@save_words_succ":
+                saveWords();
+                break;
         }
     }
 
@@ -84,5 +96,17 @@ public class OutputCompounder {
 
     protected void delTemplate() {
         output += "Phonemic template deleted\n";
+    }
+
+    protected void saveValues() {
+        output += "Phonetic set and templates saved\n";
+    }
+
+    protected  void loadValues() {
+        output += "Phonetic set and templated loaded\n";
+    }
+
+    protected void saveWords() {
+        output += "Words saved\n";
     }
 }

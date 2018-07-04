@@ -15,6 +15,10 @@ public class Processor {
         return phoneticSet;
     }
 
+    public void setPhoneticSet(PhoneticTreeSet phoneticSet) {
+        this.phoneticSet = phoneticSet;
+    }
+
     public String[] getWords() {
         return words;
     }
