@@ -1,6 +1,8 @@
 package main.java.WordGenerator;
 
-public class TemplNode {
+import java.io.Serializable;
+
+public class TemplNode implements Serializable {
     // Values
     private PhoneticCharacter phoneme;
     private boolean optional;

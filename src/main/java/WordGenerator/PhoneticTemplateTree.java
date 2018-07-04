@@ -1,8 +1,9 @@
 package main.java.WordGenerator;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class PhoneticTemplateTree {
+public class PhoneticTemplateTree implements Serializable {
     // Values
     private TemplNode root;
     private PhoneticTreeSet phSet;

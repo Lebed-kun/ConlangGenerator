@@ -1,10 +1,11 @@
 package main.java.WordGenerator;
 
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 
-public class PhoneticCharacter {
+public class PhoneticCharacter implements Serializable {
     // Values
     private String phChar;
     private HashSet<PhoneticCharacter> phSet;

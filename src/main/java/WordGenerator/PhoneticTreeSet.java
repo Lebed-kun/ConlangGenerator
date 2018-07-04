@@ -1,10 +1,11 @@
 package main.java.WordGenerator;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class PhoneticTreeSet {
+public class PhoneticTreeSet implements Serializable {
     // Values
     private PhoneticCharacter rootChar;
 
