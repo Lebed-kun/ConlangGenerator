@@ -144,10 +144,13 @@ public class ExntendedProcessor extends Processor {
         System.out.println("\"set_phoneme <wildcard> <phoneme2> [phoneme3] ... [phonemeN]\" - sets phonemes to wildcard");
         System.out.println("\"add_phoneme <phoneme1> [phoneme2] ... [phonemeN]\" - adds <phoneme1> to a list (or adds [phoneme2] ... [phonemeN] to making <phoneme1> a wildcard)");
         System.out.println("\"del_phoneme <phoneme1> [phoneme2] ... [phonemeN]\" - deletes <phoneme1> [phoneme2] ... [phonemeN] from a list");
-        System.out.println("\"add_template\" <template1> [template2] ... [templateN] - adds phonetic templates of syllables/words to a list");
-        System.out.println("\"del_template\" <template1> [template2] ... [templateN] - deletes phonetic templates of syllables/words to a list");
-        System.out.println("\"gen_words <template> <amount> - generate words by template");
+        System.out.println("\"add_template <template1> [template2] ... [templateN]\" - adds phonetic templates of syllables/words to a list");
+        System.out.println("\"del_template\" <template1> [template2] ... [templateN]\" - deletes phonetic templates of syllables/words to a list");
+        System.out.println("\"gen_words <template> <amount>\" - generate words by template");
         System.out.println("\"exit\" - exit from a program");
+        System.out.println("\"save_state <fileName>\" - saving settings (phonetic set and templates) to a file");
+        System.out.println("\"load_state <fileName>\" - loading setting from a file");
+        System.out.println("\"save_words <fileName>\" - saving words to a textfile");
     }
 
     protected void addTemplates(String[] args) throws AlreadyExistsException {
