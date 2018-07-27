@@ -4,6 +4,8 @@ import main.java.WordGenerator.*;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ExntendedProcessor extends Processor {
     // Constants
@@ -13,6 +15,7 @@ public class ExntendedProcessor extends Processor {
 
     // Values
     private HashMap<String, PhoneticTemplateTree> templates;
+    private Set<String> words;
 
     // Fields
     public HashMap<String, PhoneticTemplateTree> getTemplates() {
@@ -21,6 +24,19 @@ public class ExntendedProcessor extends Processor {
 
     public void setTemplates(HashMap<String, PhoneticTemplateTree> templates) {
         this.templates = templates;
+    }
+
+    @Override
+    public String[] getWords() {
+        String[] oldWords = new String[words.size()];
+
+        int i = 0;
+        for (String w : words) {
+            oldWords[i] = w;
+            i++;
+        }
+
+        return oldWords;
     }
 
     // Constructors
@@ -121,6 +137,19 @@ public class ExntendedProcessor extends Processor {
         }
 
         return word;
+    }
+
+    @Override
+    protected void genWords(String phoneticTemplate, int count) throws InvalidArgumentException {
+        if (count <= 0)
+            throw new InvalidArgumentException("gen_words", "positive integer to amount of words");
+
+        words = new HashSet<>();
+
+        for (int i = 0; i < count; i++) {
+            words.add(makeWord(phoneticTemplate));
+        }
+
     }
 
     // Tool methods
